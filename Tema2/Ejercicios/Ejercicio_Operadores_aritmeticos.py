@@ -1,3 +1,5 @@
+##Luis Enrique Lopez Zamora
+
 def calcular_calorias(carbohidratos, proteinas, grasas):
     """
     Calcula las calorías totales a partir de los gramos de macronutrientes.

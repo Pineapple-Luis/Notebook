@@ -1,13 +1,15 @@
+#Luis Enrique Lopez Zamora
+
 # ==========================================
 # CALCULADORA DE FITNESS Y SALUD PERSONAL
 # ==========================================
 
 #solicitar datos al usuario
-nombre = input("\n introduce tu nombre:")
-peso_kg = int(input("introduce tu Peso:"))
-altura_m = int(input("introduce tu Altura:"))
-edad = int(input("introduce tu Edad:"))
-es_hombre = input("\n Eres hombre:")
+nombre = input("\n Introduce tu nombre: ")
+peso_kg = int(input("Introduce tu Peso: "))
+altura_m = float(input("Introduce tu Altura: "))
+edad = int(input("Introduce tu Edad: "))
+es_hombre = bool(input("Eres hombre?: "))
 print("\n")
 print("\n==========================================")
 print("\nCALCULADORA DE FITNESS Y SALUD PERSONAL")
@@ -56,7 +58,7 @@ def tiene_bajo_peso(imc):
     """
     return imc < 18.5
 
-def calcular_calorias_diarias(peso_kg, altura_cm, edad, es_hombre):
+def calcular_calorias_diarias(peso_kg, altura_m, edad, es_hombre):
     """
     Calcula las calorías diarias recomendadas usando Fórmula de Harris-Benedict.
 
@@ -72,29 +74,40 @@ def calcular_calorias_diarias(peso_kg, altura_cm, edad, es_hombre):
 # Operadores aritméticos y booleanos
 # Fórmula para hombres: 88.362 + (13.397 × peso) + (4.799 × altura) - (5.677 × edad)
 # Fórmula para mujeres: 447.593 + (9.247 × peso) + (3.098 × altura) - (4.330 × edad)
-
 # Usa el hecho de que True=1 y False=0
-# TU CÓDIGO AQUÍ
 
-# def calcular_agua_diaria(peso_kg):
+    altura_m = altura_m * 100
+    calorias_hombre = 88.362 + (13.397 * peso_kg) + (4.799 * altura_m) - (5.677 * edad)
+    calorias_mujer = 447.593 + (9.247 * peso_kg) + (3.098 * altura_m) - (4.330 * edad)
+
+    return es_hombre * calorias_hombre + (1 - es_hombre) * calorias_mujer
+
+def calcular_agua_diaria(peso_kg):
     """
     Calcula litros de agua recomendados al día (35ml por kg de peso).
     """
-# TU CÓDIGO AQUÍ
+    return peso_kg * 35
 
-# def calcular_ritmo_cardiaco_maximo(edad):
+def calcular_ritmo_cardiaco_maximo(edad):
     """
     Calcula el ritmo cardíaco máximo (220 - edad).
     """
-# TU CÓDIGO AQUÍ
+    return 220 - edad
 
 imc = calcular_imc(peso_kg,altura_m)
 R_es_peso_saludable = es_peso_saludable(imc)
 R_tiene_sobrepeso = tiene_sobrepeso(imc)
 R_tiene_bajo_peso = tiene_bajo_peso(imc)
+R_calcular_calorias_diarias = calcular_calorias_diarias (peso_kg, altura_m, edad, es_hombre)
+R_calcular_agua_diaria = calcular_agua_diaria(peso_kg)
+R_calcular_ritmo_cardiaco_maximo = calcular_ritmo_cardiaco_maximo(edad)
 
 
-print(f"el indice de masa corporal: {imc}")
-print(f"Es peso saludable: {R_es_peso_saludable}")
-print(f"tiene sobre peso: {R_tiene_sobrepeso}")
-print(f"estas bajo de peso: {R_tiene_bajo_peso}")
+print("Hola " + nombre + " Vamos a validar tu Datos \n\n")
+print(f"El indice de masa corporal es de: {imc} \n\n")
+print(f"Es peso saludable: {R_es_peso_saludable} \n\n")
+print(f"Tiene sobre peso: {R_tiene_sobrepeso} \n\n")
+print(f"Estas bajo de peso: {R_tiene_bajo_peso} \n\n")
+print(f"Calorias diarias: {R_calcular_calorias_diarias} \n\n")
+print(f"Deberias de tomar: {R_calcular_agua_diaria} ml al dia \n\n")
+print(f"Tu ritmo cardiaco deberia ser de: {R_calcular_ritmo_cardiaco_maximo} FC")
